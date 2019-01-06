@@ -15,7 +15,6 @@ function copyTextarea (lyrics) {
 function lyricsGetter (message) {
     const url = document.URL;
     const mode = message.mode;
-    const fontSize = message.fontSize;
     let lyrics = '';
     let sentence = '';
     // marumaru
@@ -79,7 +78,7 @@ function lyricsGetter (message) {
         );
     }
     if (mode === MODE.ALL) {
-        lyrics = `<font size=${fontSize}>${lyrics}</font>`;
+        lyrics = `<font size=${message.fontSize}>${lyrics}</font>`;
     }
     copyTextarea(lyrics);
 }

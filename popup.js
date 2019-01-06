@@ -7,11 +7,9 @@ var getSelectedTab = (tab) => {
     }));
     document.getElementById('kanji').addEventListener('click', () => sendMessage({ 
         mode: 'kanji',
-        fontSize: document.getElementById('font_size').value,
     }));
     document.getElementById('kana').addEventListener('click', () => sendMessage({ 
         mode: 'kana',
-        fontSize: document.getElementById('font_size').value, 
     }));
 }
 chrome.tabs.getSelected(null, getSelectedTab);
