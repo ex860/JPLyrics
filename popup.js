@@ -1,7 +1,8 @@
 var getSelectedTab = (tab) => {
     var tabId = tab.id;
     var sendMessage = (messageObj) => chrome.tabs.sendMessage(tabId, messageObj);
-    document.getElementById('rotate').addEventListener('click', () => sendMessage({ action: 'ROTATE' }));
-    document.getElementById('reset').addEventListener('click', () => sendMessage({ action: 'RESET' }))
-  }
-  chrome.tabs.getSelected(null, getSelectedTab);
+    document.getElementById('all').addEventListener('click', () => sendMessage({ mode: 'all' }));
+    document.getElementById('kanji').addEventListener('click', () => sendMessage({ mode: 'kanji' }));
+    document.getElementById('kana').addEventListener('click', () => sendMessage({ mode: 'kana' }));
+}
+chrome.tabs.getSelected(null, getSelectedTab);
