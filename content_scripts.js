@@ -17,9 +17,13 @@ function lyricsGetter (message) {
     const mode = message.mode;
     let lyrics = '';
     let sentence = '';
+    let singer = '';
+    let song = '';
     // marumaru
     if (url.match(/http[s]?:\/\/www.jpmarumaru.com\/tw\/JPSongPlay-\d+\.html/)) {
         // console.log('current URL =', url);
+        song = $('h2.main-title')[0].innerText.split(' - ')[0];
+        singer = $('h2.main-title')[0].innerText.split(' - ')[1];
         $.each(
             $('#LyricsList > ul > li > span.LyricsYomi'), 
             function (k, v) { 
@@ -43,6 +47,8 @@ function lyricsGetter (message) {
         );
     } else if (url.match(/http[s]?:\/\/utaten.com\/lyric\/.*\/.*\//)) {
         // console.log('current URL =', url);
+        song = $('h1')[0].innerText.split('\n')[1].split('の')[0].slice(1, -1);
+        singer = $('span.contentBox__titleSub')[0].innerText.trim();
         $.each(
             $.parseHTML($('.medium').html()), 
             function (k, v) {
@@ -77,8 +83,15 @@ function lyricsGetter (message) {
             }
         );
     }
-    if (mode === MODE.ALL) {
-        lyrics = `<font size=${message.fontSize}>${lyrics}</font>`;
+    switch (mode) {
+        case MODE.ALL:
+            lyrics = `<font size=${message.fontSize}>${lyrics}</font>`;
+            lyrics = `# ${singer} - ${song}\n\n${lyrics}`;
+            break;
+        case MODE.KANA:
+        case MODE.KANJI:
+            lyrics = `${song} - ${singer}\n\n${lyrics}`;
+            break;
     }
     copyTextarea(lyrics);
 }
