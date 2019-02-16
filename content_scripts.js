@@ -19,6 +19,7 @@ function lyricsGetter (message) {
     let sentence = '';
     let singer = '';
     let song = '';
+    let title = '';
     // marumaru
     if (url.match(/http[s]?:\/\/www.jpmarumaru.com\/tw\/JPSongPlay-\d+\.html/)) {
         // console.log('current URL =', url);
@@ -83,14 +84,14 @@ function lyricsGetter (message) {
             }
         );
     }
+    title = `${song} - ${singer}`;
     switch (mode) {
         case MODE.ALL:
-            lyrics = `<font size=${message.fontSize}>${lyrics}</font>`;
-            lyrics = `# ${singer} - ${song}\n\n${lyrics}`;
+            lyrics = `# ${title}\n\n<font size=${message.fontSize}>${lyrics}</font>`;
             break;
         case MODE.KANA:
         case MODE.KANJI:
-            lyrics = `${song} - ${singer}\n\n${lyrics}`;
+            lyrics = `${title}\n\n${lyrics}`;
             break;
     }
     copyTextarea(lyrics);
