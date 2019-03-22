@@ -49,7 +49,7 @@ function lyricsGetter (message) {
     } else if (url.match(/http[s]?:\/\/utaten.com\/lyric\/.*\/.*\//)) {
         // console.log('current URL =', url);
         song = $('h1')[0].innerText.split(/[「」]/)[1];
-        singer = $('span.contentBox__titleSub')[0].innerText.trim();
+        singer = $('a.boxArea_artists_move_top')[0].innerText.trim();
         $.each(
             $.parseHTML($('.medium').html()), 
             function (k, v) {
