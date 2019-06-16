@@ -51,7 +51,7 @@ function lyricsGetter (message) {
         song = $('h1')[0].innerText.split(/[「」]/)[1];
         singer = $('a.boxArea_artists_move_top')[0].innerText.trim();
         $.each(
-            $.parseHTML($('.medium').html()), 
+            $.parseHTML($('.medium div.hiragana').html()), 
             function (k, v) {
                 if ($(v).context.outerHTML !== "<br>") {
                     if ($(v).html()) {
