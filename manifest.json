@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "日文歌詞下載",
     "description": "想唱日文歌卻又不知道漢字怎麼唸? 每次都要上網查很煩? 把日文歌詞下載下來自己收藏，想看就看",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "icons": {
         "16": "icon.png",
         "48": "icon.png",
