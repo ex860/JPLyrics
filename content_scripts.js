@@ -49,7 +49,6 @@ function lyricsGetter(message) {
     song = $('h1')[0].innerText.split(/[「」]/)[1];
     singer = $('dt.newLyricWork__name a')[0].innerText.trim();
     $.each($.parseHTML($('.medium div.hiragana').html()), function (k, v) {
-      console.log('v', v)
       if ($(v).context.outerHTML !== '<br>') {
         if ($(v).html()) {
           switch (mode) {
