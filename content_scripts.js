@@ -47,8 +47,9 @@ function lyricsGetter(message) {
   } else if (url.match(/http[s]?:\/\/utaten.com\/lyric\/.*\//)) {
     // console.log('current URL =', url);
     song = $('h1')[0].innerText.split(/[「」]/)[1];
-    singer = $('dt.newLyricWork__name > a')[0].innerText.trim();
+    singer = $('dt.newLyricWork__name a')[0].innerText.trim();
     $.each($.parseHTML($('.medium div.hiragana').html()), function (k, v) {
+      console.log('v', v)
       if ($(v).context.outerHTML !== '<br>') {
         if ($(v).html()) {
           switch (mode) {
