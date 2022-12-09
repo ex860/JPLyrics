@@ -22,10 +22,7 @@
                 "http://*/*",
                 "https://*/*"
             ],
-            "js": [
-                "jquery-1.11.3.min.js",
-                "content_scripts.js"
-            ]
+            "js": ["content_scripts.js"]
         }
     ],
     "background": {

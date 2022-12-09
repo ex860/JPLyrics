@@ -7,13 +7,18 @@ const MODE = {
 const NODE_NAME = {
   BR: 'BR',
   SPAN: 'SPAN',
+  RUBY: 'RUBY',
   TEXT: '#text',
 }
 
 function copyTextarea(lyrics) {
-  const textarea = `<textarea class="JPLyrics">${lyrics}</textarea>`;
-  $(textarea).insertAfter($('body'));
-  $('textarea.JPLyrics').select();
+  const timestamp = new Date().getTime();
+  const textarea = document.createElement('textarea');
+  textarea.className = `JPLyrics-${timestamp}`;
+  textarea.style.opacity = 0;
+  textarea.textContent = lyrics;
+  document.body.appendChild(textarea);
+  document.querySelector(`textarea.JPLyrics-${timestamp}`).select();
   document.execCommand('copy');
   alert('Content is copied!');
 }
@@ -25,30 +30,49 @@ function lyricsGetter(message) {
   let singer = '';
   let song = '';
   let title = '';
-  // marumaru
-  if (url.match(/http[s]?:\/\/www.jpmarumaru.com\/tw\/JPSongPlay-\d+\.html/)) {
-    // console.log('current URL =', url);
-    song = $('h2.main-title')[0].innerText.split(' - ')[0];
-    singer = $('h2.main-title')[0].innerText.split(' - ')[1];
-    $.each($('#LyricsList > ul > li > span.LyricsYomi'), function (k, v) {
-      switch (mode) {
-        case MODE.ALL: // 包含振り仮名 (html)
-          $(v).find('rb').contents().unwrap();
-          break;
-        case MODE.KANJI: // 移除振り仮名 (plain text)
-          $(v).find('rt').remove();
-          $(v).find('rb').unwrap();
-          $(v).find('rb').contents().unwrap();
-          break;
-        case MODE.KANA: // 全假名 (plain text)
-          $(v).find('rb').remove();
-          $(v).find('rt').unwrap();
-          $(v).find('rt').contents().unwrap();
-          break;
-      }
-      lyrics += $(v).html() + '\n';
-    });
-  } else if (url.match(/http[s]?:\/\/utaten.com\/lyric\/.*\//)) {
+
+  if (url.match(/https?:\/\/www.jpmarumaru.com\/tw\/JPSongPlay-\d+\.html/)) {
+    const mainTitleText = document.querySelector('.main-title')?.textContent;
+    if (typeof mainTitleText === 'string') {
+      ([song, singer] = mainTitleText.split(' - '));
+    }
+    switch (mode) {
+      case MODE.ALL: 
+      case MODE.KANJI:
+        document.querySelectorAll('#LyricsList > ul > li > span.LyricsYomi').forEach(span => {
+          const { childNodes } = span || {};
+          if (childNodes?.length) {
+            childNodes.forEach(node => {
+              switch(node.nodeName) {
+                case NODE_NAME.RUBY:
+                  const [rb, rt] = node.children || [];
+                  const rbText = rb.textContent;
+                  const rtText = rt.textContent;
+                  if (mode === MODE.ALL) {
+                    lyrics += `<ruby>${rbText}<rt>${rtText}</rt></ruby>`;
+                  } else {
+                    lyrics += rbText;
+                  }
+                  break;
+                case NODE_NAME.TEXT:
+                  const { textContent } = node || {};
+                  if (typeof textContent === 'string' && textContent.replace(/\s/g, '')) {
+                    lyrics += textContent;
+                  }
+                  break;
+              }
+            })
+          }
+          lyrics += span.textContent + '\n\n';
+        });
+        break;
+      case MODE.KANA:
+        document.querySelectorAll('#LyricsList > ul > li > span.LyricsYomiKana').forEach(span => {
+          lyrics += span.textContent + '\n\n';
+        });
+        break;
+    }
+  } else if (url.match(/https?:\/\/utaten.com\/lyric\/.*\//)) {
     const songNameText = document.querySelector('.newLyricTitle__main')?.childNodes?.[0]?.textContent;
     if (typeof songNameText === 'string') {
       song = songNameText.replace(/\s/g, '');
@@ -58,7 +82,7 @@ function lyricsGetter(message) {
       singer = singerText.replace(/\s/g, '');
     }
     const { childNodes } = document.querySelector('.medium div.hiragana') || {};
-    if (childNodes.length) {
+    if (childNodes?.length) {
       childNodes.forEach(node => {
         if (node.nodeName === NODE_NAME.SPAN) {
           const [rb, rt] = node.children || [];
