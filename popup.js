@@ -1,15 +1,11 @@
-var getSelectedTab = (tab) => {
-    var tabId = tab.id;
-    var sendMessage = (messageObj) => chrome.tabs.sendMessage(tabId, messageObj);
-    document.getElementById('all').addEventListener('click', () => sendMessage({ 
-        mode: 'all',
-        fontSize: document.getElementById('font_size').value,
-    }));
-    document.getElementById('kanji').addEventListener('click', () => sendMessage({ 
-        mode: 'kanji',
-    }));
-    document.getElementById('kana').addEventListener('click', () => sendMessage({ 
-        mode: 'kana',
-    }));
+const getSelectedTab = tabs => {
+    const addClickEventListenerToSelector = (selector, message) => {
+        document.getElementById(selector).addEventListener('click', () => {
+            chrome.tabs.sendMessage(tabs[0].id, message)
+        });
+    };
+    addClickEventListenerToSelector('all', { mode: 'all', fontSize: document.getElementById('font_size').value });
+    addClickEventListenerToSelector('kanji', { mode: 'kanji' });
+    addClickEventListenerToSelector('kana', { mode: 'kana' });
 }
-chrome.tabs.getSelected(null, getSelectedTab);
+chrome.tabs.query({ active: true, currentWindow: true }, getSelectedTab);
