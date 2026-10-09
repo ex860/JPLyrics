@@ -1,12 +1,21 @@
 # JPLyrics
 
-> 輕鬆取得日文歌詞！到指定的歌詞網站，按一下按鈕就輕鬆複製歌詞
->
-> - 支援 HTML 的 Ruby 標籤，看不懂漢字也可以輕鬆了解念法
-> - 三種模式可以選取，不管你是要純假名，不要念法，還是要有振り仮名都可以！
+在 UtaTen 歌詞頁按右鍵，選擇「複製歌詞」即可複製日文歌詞。
 
-- Chrome Extension 連結：[日文歌詞下載](https://chrome.google.com/webstore/detail/%E6%97%A5%E6%96%87%E6%AD%8C%E8%A9%9E%E4%B8%8B%E8%BC%89/pmdlhfbdfflgchidenaommfoadiedlmo?hl=zh-TW&authuser=0)
+- 漢字有讀音 (HTML)：使用 Ruby 標籤，字體大小固定為 5。
+- 漢字無讀音 (純文字)。
+- 全假名 (純文字)。
 
-- 支援網站：
-  - [UtaTen](https://utaten.com/)
-  - [marumaru](https://www.jpmarumaru.com/tw/JPSongList.asp)
+支援網站：[UtaTen](https://utaten.com/)，網址必須以 `https://utaten.com/lyric/` 開頭。其他網址不會顯示此右鍵選單。
+
+## 使用方式
+
+1. 開啟 UtaTen 歌詞頁，等待歌詞載入。
+2. 在頁面按右鍵，選擇「複製歌詞」，再選擇需要的模式。
+3. 出現「歌詞已複製！」後，即可貼到需要的地方。
+
+## 本機安裝／更新
+
+在 Chrome 的 `chrome://extensions` 開啟開發人員模式，使用「載入未封裝項目」選取此專案目錄。更新程式後按擴充功能的重新載入按鈕，再重新整理已開啟的歌詞頁。
+
+Chrome Extension：[日文歌詞下載](https://chrome.google.com/webstore/detail/pmdlhfbdfflgchidenaommfoadiedlmo)

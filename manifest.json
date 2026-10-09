@@ -1,27 +1,11 @@
 {
-    "manifest_version": 3,
-    "name": "日文歌詞下載",
-    "description": "想唱日文歌卻又不知道漢字怎麼唸? 每次都要上網查很煩? 把日文歌詞下載下來自己收藏，想看就看",
-    "version": "1.1.0",
-    "icons": {
-        "16": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png"
-    },
-    "action": {
-        "default_icon": "icon.png",
-        "default_popup": "popup.html"
-    },
-    "host_permissions": [
-        "https://utaten.com/lyric/*",
-        "https://www.jpmarumaru.com/tw/*"
-    ],
-    "content_scripts": [
-        {
-            "matches": [
-                "https://*/*"
-            ],
-            "js": ["content_scripts.js"]
-        }
-    ]
+  "manifest_version": 3,
+  "name": "日文歌詞下載",
+  "description": "在 UtaTen 歌詞頁按右鍵即可複製日文歌詞，支援漢字、假名與 Ruby 讀音 HTML。",
+  "version": "1.2.0",
+  "icons": { "16": "icon.png", "48": "icon.png", "128": "icon.png" },
+  "background": { "service_worker": "background.js" },
+  "permissions": ["contextMenus", "clipboardWrite"],
+  "host_permissions": ["https://utaten.com/lyric/*"],
+  "content_scripts": [{ "matches": ["https://utaten.com/lyric/*"], "js": ["content_scripts.js"] }]
 }
