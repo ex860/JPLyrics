@@ -1,0 +1,27 @@
+:root { font-family: system-ui, "Microsoft JhengHei", sans-serif; color: #202b36; background: #f3f5f4; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 48px 24px; }
+main { max-width: 760px; margin: auto; padding: 44px 52px; border: 1px solid #dce3df; border-radius: 24px; background: #fff; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 650; }
+.brand span { margin-left: auto; font-size: 12px; color: #56665e; font-weight: 400; }
+.eyebrow { margin: 42px 0 12px; color: #267353; font-weight: 700; font-size: 14px; }
+h1 { font-size: clamp(32px, 5vw, 46px); line-height: 1.25; margin: 0 0 20px; letter-spacing: -.03em; }
+.intro { line-height: 1.85; color: #52605a; font-size: 16px; }
+section { margin: 28px 0 20px; padding: 24px; background: #f3f7f4; border-radius: 16px; }
+h2 { font-size: 17px; margin: 0 0 20px; }
+ol { margin: 0; padding-left: 24px; }
+li { padding-left: 6px; margin-bottom: 18px; }
+li:last-child { margin-bottom: 0; }
+li::marker { color: #267353; font-weight: 700; }
+li strong, li span { display: block; }
+li span { font-size: 14px; color: #52605a; margin-top: 5px; line-height: 1.5; }
+.note, .footer { font-size: 13px; line-height: 1.8; color: #59655f; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+a, button { padding: 13px 20px; border-radius: 9px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+a { color: white; background: #236b4d; text-decoration: none; }
+a:hover { background: #195137; }
+button { border: 1px solid #ccd6cf; background: white; color: #34473c; }
+button:hover { background: #f3f7f4; }
+a:focus-visible, button:focus-visible { outline: 3px solid #79b698; outline-offset: 3px; }
+.footer { margin-top: 24px; margin-bottom: 0; }
+@media (max-width: 520px) { body { padding: 16px; } main { padding: 28px 22px; } .brand { flex-wrap: wrap; } .brand span { margin-left: 0; } }

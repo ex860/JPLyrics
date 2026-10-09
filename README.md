@@ -19,3 +19,7 @@
 在 Chrome 的 `chrome://extensions` 開啟開發人員模式，使用「載入未封裝項目」選取此專案目錄。更新程式後按擴充功能的重新載入按鈕，再重新整理已開啟的歌詞頁。
 
 Chrome Extension：[日文歌詞下載](https://chrome.google.com/webstore/detail/pmdlhfbdfflgchidenaommfoadiedlmo)
+
+## 新版首次使用提示
+
+首次安裝或首次升級到右鍵選單版本時，會自動開啟使用說明分頁，介紹新的複製入口。提示顯示狀態只記錄在本機；後續更新或重新啟動不會重複開啟。移除後重新安裝會再次顯示。
